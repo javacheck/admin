@@ -7,9 +7,7 @@ public final class PasswordUtils {
 		return new StrongPasswordEncryptor().encryptPassword(password);
 	}
 
-	public static boolean checkPassword(String plainPassword,
-			String encryptedPassword) {
-		return new StrongPasswordEncryptor().checkPassword(plainPassword,
-				encryptedPassword);
+	public static boolean checkPassword(String plainPassword, String encryptedPassword) {
+		return new StrongPasswordEncryptor().checkPassword(plainPassword, encryptedPassword);
 	}
 }

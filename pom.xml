@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.self.mvc</groupId>
@@ -11,17 +11,37 @@
     <name>admin</name>
     <description>admin project for Spring MVC</description>
 
+    <!-- 全局配置 -->
     <properties>
+        <!-- 项目构建资源字符集 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- 项目输出字符集 -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- Java版本号 -->
         <java.version>1.8</java.version>
+
         <!-- 日志框架版本号 -->
         <slf4j.version>2.7</slf4j.version>
         <log4j.version>2.7</log4j.version>
+
+        <!-- Spring版本号 -->
         <spring.version>4.1.6.RELEASE</spring.version>
+
+        <!-- Servlet版本号 -->
+        <servlet.version>3.1.0</servlet.version>
+
+        <!-- JSP版本号 -->
+        <jsp.version>2.3.1</jsp.version>
+
+        <!-- JSTL版本号 -->
+        <jstl.version>1.2</jstl.version>
     </properties>
 
     <dependencies>
+
+        <!-- SpringMVC最基础的依赖包导入 -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -33,18 +53,23 @@
             <version>${spring.version}</version>
         </dependency>
 
+        <!-- Servlet 关键基础支持包导入  -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <version>${servlet.version}</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- JSP 页面基础支持包导入 支持写jsp -->
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>javax.servlet.jsp-api</artifactId>
             <version>2.3.1</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- JSTL  支持在jsp中的c标签-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
@@ -158,11 +183,13 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.5</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
             <plugin>

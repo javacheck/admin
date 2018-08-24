@@ -56,14 +56,13 @@ public class SecurityController {
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public String login(String username, String password, String captcha,
-			Model model) {
+	public String login(String accoutName, String passWord, String captcha, Model model) {
 		String text = (String) WebUtils.getAttributeFromSession(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
-//		if (StringUtil.isBlank(captcha) || !captcha.equalsIgnoreCase(text)) {
-//			model.addAttribute("error", "验证码不对");
-//			return "login";
-//		}
-		Account account = accountService.login(username, password);
+		if (StringUtil.isBlank(captcha) || !captcha.equalsIgnoreCase(text)) {
+			model.addAttribute("error", "验证码不对");
+			return "login";
+		}
+		Account account = accountService.login(accoutName, passWord);
 		if (account == null) {
 			model.addAttribute("error", "用户名或者密码不对");
 			return "login";
@@ -76,11 +75,9 @@ public class SecurityController {
 		// 帐号信息
 		WebUtils.setAttributeToSession(Constants.ACCOUNT_SESSION_KEY, account);
 		// 拥有的角色
-		WebUtils.setAttributeToSession(Constants.ROLE_SESSION_KEY,
-				roleService.findByAccountId(account.getId()));
+		WebUtils.setAttributeToSession(Constants.ROLE_SESSION_KEY, roleService.findByAccountId(account.getId()));
 		// 拥有的权限
-		WebUtils.setAttributeToSession(Constants.PERMISSION_SESSION_KEY,
-				permissionService.findByAccountId(account.getId()));
+		WebUtils.setAttributeToSession(Constants.PERMISSION_SESSION_KEY, permissionService.findByAccountId(account.getId()));
 	}
 
 }

@@ -14,15 +14,13 @@ public class MysqlIdService implements IdService {
 	@Override
 	@Transactional
 	public Long getId() {
-		Long id = jdbcTemplate.queryForObject(
-				"select value from t_id where name = 'common'", Long.class);
+		Long id = jdbcTemplate.queryForObject("select value from t_id where name = 'common'", Long.class);
 		jdbcTemplate.update("update t_id set value = value + 1");
 		return id;
 	}
 
 	@Override
 	public Long getOrderId() {
-		// TODO Auto-generated method stub
 		return getId();
 	}
 

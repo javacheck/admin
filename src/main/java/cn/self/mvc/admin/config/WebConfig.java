@@ -19,7 +19,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "cn.self.mvc.admin" }, includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Controller.class))
+@ComponentScan(basePackages = { "cn.self.mvc.admin" },lazyInit=true, includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Controller.class))
 public class WebConfig extends WebMvcConfigurerAdapter {
 	@Autowired
 	private CacheService cacheService;
@@ -35,19 +35,18 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new APIHandlerInterceptor(cacheService))
-				.addPathPatterns("/api/**");
+		registry.addInterceptor(new APIHandlerInterceptor(cacheService)).addPathPatterns("/api/**");
 		super.addInterceptors(registry);
 	}
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/static/**").addResourceLocations(
-				"/WEB-INF/static/");
+		registry.addResourceHandler("/static/**").addResourceLocations("/WEB-INF/static/");
 	}
 
 	@Bean(name = "multipartResolver")
 	public MultipartResolver multipartResolver() {
+
 		return new CommonsMultipartResolver();
 	}
 }

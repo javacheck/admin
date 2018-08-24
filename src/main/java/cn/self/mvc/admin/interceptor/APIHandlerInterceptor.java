@@ -15,8 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class APIHandlerInterceptor implements HandlerInterceptor {
 
-	private final static Logger logger = LoggerFactory
-			.getLogger(APIHandlerInterceptor.class);
+	private final static Logger logger = LoggerFactory.getLogger(APIHandlerInterceptor.class);
 
 	private CacheService cacheService;
 
@@ -26,6 +25,7 @@ public class APIHandlerInterceptor implements HandlerInterceptor {
 	}
 
 	private final static String[] ignoreLoginUrls = new String[] { "/api/login*","**/ajax/**", "**/test/**" };
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		String path = request.getRequestURI();

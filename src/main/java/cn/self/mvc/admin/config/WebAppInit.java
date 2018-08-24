@@ -4,7 +4,6 @@ import cn.self.mvc.admin.filter.SecurityFilter;
 import jodd.decora.DecoraServletFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
 import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
@@ -15,16 +14,19 @@ public class WebAppInit extends AbstractAnnotationConfigDispatcherServletInitial
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
+
 		return new Class[]{RootConfig.class};
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
+
 		return new Class[]{WebConfig.class};
 	}
 
 	@Override
 	protected String[] getServletMappings() {
+
 		return new String[]{"/"};
 	}
 
@@ -50,6 +52,8 @@ public class WebAppInit extends AbstractAnnotationConfigDispatcherServletInitial
 	}
 
 	private EnumSet<DispatcherType> getDispatcherTypes() {
-		return isAsyncSupported() ? EnumSet.of(DispatcherType.REQUEST,DispatcherType.ERROR, DispatcherType.ASYNC) : EnumSet.of(DispatcherType.REQUEST, DispatcherType.ERROR);
+		return isAsyncSupported()
+				? EnumSet.of(DispatcherType.REQUEST,DispatcherType.ERROR, DispatcherType.ASYNC)
+				: EnumSet.of(DispatcherType.REQUEST, DispatcherType.ERROR);
 	}
 }

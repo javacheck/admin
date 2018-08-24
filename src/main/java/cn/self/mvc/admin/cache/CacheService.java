@@ -9,42 +9,39 @@ public interface CacheService {
 	 * @param value
 	 * @param liveSeconds 秒数
 	 */
-	public void set(String key, Object value, Long liveSeconds);
+	void set(String key, Object value, Long liveSeconds);
 
-	public void set(String key, Object value);
+	void set(String key, Object value);
 
-	public Object get(String key);
+	Object get(String key);
 
-	public void delete(String key);
+	void delete(String key);
 
-	public Long getExpire(String key);
+	Long getExpire(String key);
 
-	public Boolean expire(String key, Long liveSeconds);
+	Boolean expire(String key, Long liveSeconds);
 
-	public Boolean hasKey(String key);
+	Boolean hasKey(String key);
 
 	/**
 	 * 保存到hash表
-	 * 
-	 * @param key
-	 *            redis中key
-	 * @param hashKey
-	 *            hash表中可以
+	 * @param key redis中key
+	 * @param hashKey hash表中可以
 	 * @param value
 	 */
-	public void setToHash(String key, Object hashKey, Object value);
+	void setToHash(String key, Object hashKey, Object value);
 
-	public Object getFromHash(String key, Object hashKey);
+	Object getFromHash(String key, Object hashKey);
 
-	public Boolean hasHashKey(String key, Object hashKey);
+	Boolean hasHashKey(String key, Object hashKey);
 
-	public Long hashSize(String key);
+	Long hashSize(String key);
 
-	public void deleteFromHash(String key, Object... hashKeys);
+	void deleteFromHash(String key, Object... hashKeys);
 
-	public Long increment(String key, Long value);
+	Long increment(String key, Long value);
 
-	public Long increment(String key);
-	
-	public void sendMessage(String channel, Serializable message);
+	Long increment(String key);
+
+	void sendMessage(String channel, Serializable message);
 }

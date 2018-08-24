@@ -29,7 +29,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import redis.clients.jedis.JedisPoolConfig;
-
 import javax.sql.DataSource;
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,9 +38,12 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 @Configuration
-@ComponentScan(basePackages = { "cn.self.mvc.admin" }, excludeFilters = {
+@ComponentScan(basePackages = { "cn.self.mvc.admin" },
+		excludeFilters = {
 		@ComponentScan.Filter(type = FilterType.ANNOTATION, value = Configuration.class),
-		@ComponentScan.Filter(type = FilterType.ANNOTATION, value = Controller.class) })
+		@ComponentScan.Filter(type = FilterType.ANNOTATION, value = Controller.class)
+		}
+)
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableScheduling
 public class RootConfig implements SchedulingConfigurer {
@@ -76,12 +78,14 @@ public class RootConfig implements SchedulingConfigurer {
 	@Bean
 	@Autowired
 	public PlatformTransactionManager transactionManager(DataSource dataSource) {
+
 		return new DataSourceTransactionManager(dataSource);
 	}
 
 	@Bean
 	@Autowired
 	public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+
 		return new JdbcTemplate(dataSource);
 	}
 
@@ -111,8 +115,7 @@ public class RootConfig implements SchedulingConfigurer {
 		properties.setProperty("kaptcha.image.height", "40");
 		properties.setProperty("kaptcha.textproducer.char.length", "4");
 		properties.setProperty("kaptcha.textproducer.font.size", "32");
-		properties.setProperty("kaptcha.textproducer.char.string",
-				"ABCDEFGHJKMNPRSTVWXabcde2345678gfmnprswx");
+		properties.setProperty("kaptcha.textproducer.char.string", "ABCDEFGHJKMNPRSTVWXabcde2345678gfmnprswx");
 
 		Config config = new Config(properties);
 		producer.setConfig(config);
@@ -124,19 +127,15 @@ public class RootConfig implements SchedulingConfigurer {
 		JedisPoolConfig poolConfig = new JedisPoolConfig();
 		poolConfig.setMaxTotal(ConfigUtils.getInteger("redis.pool.maxTotal"));
 		poolConfig.setMaxIdle(ConfigUtils.getInteger("redis.pool.maxIdle"));
-		poolConfig.setTestOnBorrow(ConfigUtils
-				.getBoolean("redis.pool.testOnBorrow"));
-		poolConfig.setMaxWaitMillis(ConfigUtils
-				.getInteger("redis.pool.maxWait"));
+		poolConfig.setTestOnBorrow(ConfigUtils.getBoolean("redis.pool.testOnBorrow"));
+		poolConfig.setMaxWaitMillis(ConfigUtils.getInteger("redis.pool.maxWait"));
 		return poolConfig;
 	}
 
 	@Bean
 	@Autowired
-	public JedisConnectionFactory jedisConnectionFactory(
-			JedisPoolConfig jedisPoolConfig) {
-		JedisConnectionFactory connectionFactory = new JedisConnectionFactory(
-				jedisPoolConfig);
+	public JedisConnectionFactory jedisConnectionFactory(JedisPoolConfig jedisPoolConfig) {
+		JedisConnectionFactory connectionFactory = new JedisConnectionFactory(jedisPoolConfig);
 		connectionFactory.setHostName(ConfigUtils.getProperty("redis.ip"));
 		connectionFactory.setPort(ConfigUtils.getInteger("redis.port"));
 		connectionFactory.setUsePool(true);
@@ -145,8 +144,7 @@ public class RootConfig implements SchedulingConfigurer {
 
 	@Bean
 	@Autowired
-	public RedisTemplate<String, Object> redisTemplate(
-			JedisConnectionFactory connectionFactory) {
+	public RedisTemplate<String, Object> redisTemplate(JedisConnectionFactory connectionFactory) {
 		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
 		redisTemplate.setConnectionFactory(connectionFactory);
 		return redisTemplate;
@@ -155,12 +153,14 @@ public class RootConfig implements SchedulingConfigurer {
 	@Bean
 	@Autowired
 	public IdService idService(JdbcTemplate jdbcTemplate) {
+
 		return new MysqlIdService(jdbcTemplate);
 	}
 
 	@Bean
 	@Autowired
 	public FileService fileService() {
+
 		return new SimpleFileService(ConfigUtils.getProperty("file.storePath"));
 	}
 
@@ -174,10 +174,13 @@ public class RootConfig implements SchedulingConfigurer {
 	//定时任务
 	@Override
 	public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
+
 		taskRegistrar.setScheduler(taskExecutor());
 	}
+
 	@Bean(destroyMethod = "shutdown")
 	public Executor taskExecutor() {
+
 		return Executors.newScheduledThreadPool(100);
 	}
 }

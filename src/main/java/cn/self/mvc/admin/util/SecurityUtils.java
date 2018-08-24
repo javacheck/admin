@@ -28,14 +28,12 @@ public final class SecurityUtils {
 
 	@SuppressWarnings("unchecked")
 	public static List<Permission> getPermissionList() {
-		return (List<Permission>) WebUtils
-				.getAttributeFromSession(Constants.PERMISSION_SESSION_KEY);
+		return (List<Permission>) WebUtils.getAttributeFromSession(Constants.PERMISSION_SESSION_KEY);
 	}
 
 	@SuppressWarnings("unchecked")
 	public static boolean hasPermission(String permission) {
-		List<Permission> permissons = (List<Permission>) WebUtils
-				.getAttributeFromSession(Constants.PERMISSION_SESSION_KEY);
+		List<Permission> permissons = (List<Permission>) WebUtils.getAttributeFromSession(Constants.PERMISSION_SESSION_KEY);
 		for (Permission pm : permissons) {
 			if (pm.getOperator().equals(permission)) {
 				return true;
@@ -46,8 +44,7 @@ public final class SecurityUtils {
 
 	@SuppressWarnings("unchecked")
 	public static boolean hasAnyPermission(String... ps) {
-		List<Permission> permissons = (List<Permission>) WebUtils
-				.getAttributeFromSession(Constants.PERMISSION_SESSION_KEY);
+		List<Permission> permissons = (List<Permission>) WebUtils.getAttributeFromSession(Constants.PERMISSION_SESSION_KEY);
 		for (String p : ps) {
 			for (Permission pm : permissons) {
 				if (pm.getOperator().equals(p)) {
@@ -80,8 +77,7 @@ public final class SecurityUtils {
 	 * @return
 	 */
 	public static Account getAccount() {
-		return (Account) WebUtils
-				.getAttributeFromSession(Constants.ACCOUNT_SESSION_KEY);
+		return (Account) WebUtils.getAttributeFromSession(Constants.ACCOUNT_SESSION_KEY);
 	}
 
 	/**

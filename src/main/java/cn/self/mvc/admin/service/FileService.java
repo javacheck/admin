@@ -10,17 +10,17 @@ public interface FileService {
 	 * @param id
 	 * @return
 	 */
-	public String save(InputStream in, String id);
+	String save(InputStream in, String id);
 	
-	public String save(InputStream in);
+	String save(InputStream in);
 
-	public InputStream get(String id);
+	InputStream get(String id);
 
-	public void write(String id, OutputStream out);
+	void write(String id, OutputStream out);
 
-	public void delete(String id);
+	void delete(String id);
 
-	public String getFileServer();
+	String getFileServer();
 
-	public String getPrefix();
+	String getPrefix();
 }

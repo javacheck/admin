@@ -1,220 +1,113 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- <!DOCTYPE> 声明必须是 HTML 文档的第一行，位于 <html> 标签之前。指示 web 浏览器关于页面使用哪个 HTML 版本 ( HTML5) -->
+<!DOCTYPE>
 <html>
+
+<title>登录入口</title>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>登录</title>
-<link rel="stylesheet" href="${staticPath }/css/all.admin.css">
-<script type="text/javascript">var config={}</script>
-<script type="text/javascript" src="${staticPath }/js/all.admin.js"></script>
+	<!-- 设置页面的编码格式 -->
+	<meta charset="utf-8" />
+	<!-- 设定页面使用的字符集。 -->
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<!-- 显示语言的设定 -->
+	<meta http-equiv="content-language" content="zh-CN" />
+	<!-- 如果安装了GCF，则使用GCF来渲染页面，如果未安装GCF，则使用最高版本的IE内核进行渲染。 -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- 在HTML中，link元件必须在head元件里，在<head>和</head>之间)。 -->
+	<link href="${contextPath }/static/images/favicon.ico" rel="SHORTCUT ICON" />
+	<!-- 前端框架CSS样式 -->
+	<link href="${contextPath }/static/js/plugins/layui/css/layui.css" rel="stylesheet" type="text/css" media="all" />
+	
+	<link href="${contextPath }/static/css/modules/login/reset.css" rel="stylesheet" />
+	<link href="${contextPath }/static/css/modules/login/radiocheck.css" rel="stylesheet" />
+	<link href="${contextPath }/static/css/modules/login/login.css" rel="stylesheet" />
+		
+	<!-- 导入jquery类库框架 -->
+	<script src="${contextPath }/static/js/plugins/jquery/jquery-1.10.2.min.js" type="text/javascript"></script>
+	<!-- 导入前端框架 -->
+	<script src="${contextPath }/static/js/plugins/layui/layui.js" type="text/javascript"></script>
+	
+	<script src="${contextPath }/static/js/modules/login/login.js" type="text/javascript"></script>
+	<script src="${contextPath }/static/js/modules/login/radiocheck.js" type="text/javascript"></script>
+</head>
 <script type="text/javascript">
     $(function() {
         $("#_captcha").click(function() {
-			$(this).attr("src", "${contextPath }/captcha?" + new Date());
-		});
-	});
+            $(this).attr("src", "${contextPath }/captcha?" + new Date());
+        });
+    });
 </script>
-<style>
-.user-control-nav {
-	margin-bottom: 20px;
-}
-
-@media ( max-width : 480px) {
-	.hidden-xxs {
-		display: none
-	}
-	.page {
-		font-size: 12px
-	}
-}
-
-@media ( max-width : 400px) {
-	.hidden-xxxs {
-		display: none
-	}
-}
-
-#login .panel {
-	width: 80%;
-	margin: 5% auto;
-	max-width: 450px;
-}
-
-#login .panel-body {
-	min-height: 230px;
-}
-
-#login .panel-heading {
-	background-color: transparent;
-}
-
-.btn-oauth {
-	text-align: left;
-	padding-left: 130px;
-	font-size: 24px;
-	line-height: 50px;
-	position: relative;
-	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
-	color: #333;
-	background-color: #FCFCFC;
-	border: 1px solid #DEDEDE;
-}
-
-.btn-oauth:hover {
-	color: #333;
-	background-color: #E8E8E8;
-	border-color: #ccc;
-	-moz-box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
-	-webkit-box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
-	box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
-}
-
-.btn-oauth .icon {
-	font-size: 40px;
-	position: absolute;
-	left: 75px;
-	text-shadow: none;
-}
-
-.btn-oauth .icon:before {
-	display: none;
-}
-
-#adminLogin {
-	max-width: 500px;
-	margin: 5% auto;
-	padding: 0;
-	background-color: #FFF;
-	border: 1px solid #DDD;
-	-moz-box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15);
-	-webkit-box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15);
-	box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15);
-	border-radius: 6px;
-}
-
-#responser {
-	line-height: 30px;
-	font-size: 12px
-}
-
-#logo {
-	margin-bottom: 10px;
-}
-
-#adminLogin #siteName {
-	padding: 20px 20px 10px;
-	background: #fafafa;
-	border-bottom: 1px solid #e5e5e5;
-	border-radius: 6px 6px 0 0
-}
-
-#adminLogin #ajaxForm {
-	padding: 20px 20px;
-}
-
-#adminLogin #submit {
-	min-width: 100px;
-}
-
-@media ( max-width : 700px) {
-	#adminLogin {
-		border: none;
-		margin: 0 auto;
-		box-shadow: none;
-		padding: 20px 15px;
-		background-color: #fff;
-		margin: 0 auto;
-		border-radius: 0
-	}
-	body {
-		padding: 0;
-	}
-	.container {
-		padding: 0;
-	}
-	#adminLogin #siteName {
-		background: #fff
-	}
-}
-
-@media ( max-width : 767px) {
-	#login .panel {
-		margin: 20px auto;
-		width: 100%;
-	}
-	#login .panel-heading {
-		padding: 0 0 10px 0;
-	}
-	#login .panel-body {
-		padding: 10px 0;
-		min-height: inherit;
-	}
-	.btn-oauth {
-		padding-left: 80px;
-	}
-	.btn-oauth .icon {
-		left: 20px;
-	}
-}
-
-#siteName {
-	font-size: 14px;
-	color: #444;
-	font-weight: 600;
-	display: block;
-}
-
-hr {
-	margin-top: 8px;
-}
-
-body {
-	background-color: #f6f5f5
-}
-</style>
-</head>
 <body>
-	<div class='container'>
-		<div id='adminLogin'>
-			<div id='siteName'>后台管理系统</div>
-			<form method='post'>
-				<c:if test="${not empty error }">
-					<div id='formError' class='alert alert-danger'>${error }</div>
-				</c:if>
-				<div class='row'>
-					<div class='col-xs-8'>
-						<table class="table table-form">
-							<tr>
-								<th class='w-60px'>用户名</th>
-								<td><input type='text' name='username' id='username'
-									value='' class='form-control' placeholder='请输入用户名' /></td>
-							</tr>
-							<tr>
-								<th>密码</th>
-								<td><input type='password' name='password' id='password'
-									value='' class='form-control' placeholder='请输入密码' /></td>
-							</tr>
-							<tr>
-								<th>验证码</th>
-								<td><input type='text' id="captcha" name="captcha" value=''
-									class='form-control' placeholder='请输入验证码' /> <img
-									id="_captcha" style="cursor: pointer; margin-top: 5px;" alt=""
-									src="${contextPath }/captcha"></td>
-							</tr>
-							<tr>
-								<th></th>
-								<td><input type='submit'
-									class='btn btn-primary btn' value='登录' data-loading='稍候...' />
-								</td>
-							</tr>
-						</table>
+<input id="error" name="error" value="${error}"/>
+	<div class="wrap">
+		<!-- 遮罩层，为了让输入框不那么透明 -->
+		<div class="loginfixed"></div>
+		<!-- 控制输入框的左右位置 -->
+		<div class="wrap-login">
+		
+			<!-- 趴在登录输入框上的动物  -->
+			<div class="people">
+				<div class="tou"></div>
+				<div id="left-hander" class="initial_left_hand transition"></div>
+				<div id="right-hander" class="initial_right_hand transition"></div>
+			</div>
+					
+			<form style="margin-top: 0px;" autocomplete="off" method="post" onsubmit="return validate(this);">
+				<div class="login-box">
+					<div class="logo">
+						<span id="welcomeMsg"></span>
+					</div>
+					<div class="login clearfix">
+						<div class="login-user">
+							<i class="icon-user"></i>
+							<input id="accoutName" type="text" placeholder="账 号" name="accoutName" value=""/>
+						</div>
+						<div class="login-pwd">
+							<i class="icon-pwd"></i>
+							<input id="passWord" type="password" placeholder="密 码" name="passWord"/>
+						</div>
+
+						<div class="login-pwd">
+							<i class="icon-pwd"></i>
+							<input type='text' id="captcha" name="captcha" value='' class='form-control' placeholder='请输入验证码' />
+							<img id="_captcha" style="cursor: pointer; margin-top: 5px;" alt="" src="${contextPath }/captcha">
+						</div>
+
+						<div>
+							<div class="check-box"></div>
+							<button type="submit" class="btn btn-block">登 录</button>
+						</div>
+					</div>
+					<div class="error">
+						<span id="errorMsg"></span>
 					</div>
 				</div>
 			</form>
 		</div>
+		
+		<!-- 页首(页标首) -->
+		<div class="wrap-mod">
+			<ul>
+				<img src="${contextPath }/static/images/modules/login/logo.png" />
+				<div class="divShowTitle">
+				| Java程序员编写 欢迎您
+				</div>
+			</ul>
+			<ul class="weather">
+				<div style="width:525px;height:120px;overflow:hidden;border:0px">
+				</div>
+			</ul>
+		</div>
+		
+		<!-- 页脚  -->
+		<div class="footer">
+			Copyright©2017 Java程序员编写   版权所有 | 建议浏览器：Chrome/360极速/Firefox/Safari/IE9以上
+		</div>
 	</div>
 </body>
+
 </html>
